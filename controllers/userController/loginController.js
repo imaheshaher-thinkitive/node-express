@@ -38,7 +38,7 @@ module.exports.loginWithJWT =  async (req, res, next) => {
               const body = { _id: user._id, email: user.email };
               const token = jwt.sign({ user: body }, env.JWT_SECRETE);
 
-              return res.json({ token:token,user:user });
+              return res.json({ token:token});
             }
           );
         } catch (error) {
