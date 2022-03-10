@@ -6,6 +6,10 @@ const loginController = require("../../controllers/userController/loginControlle
 const { validateData } = require("../../lib/validateData")
 const { validateUser, checkOneOf } = require("../../validator/userValidate")
 const passport = require("passport")
+const jwt = require('jsonwebtoken');
+const isLoggedIn = require("../../middleware/isLoggedIn")
+const connectEnsureLogin = require('connect-ensure-login');// authorization
+
 //get all user
 router.get("/all",userController.getAll)
 
@@ -32,6 +36,20 @@ router.delete("/delete",userController.delete)
 
 
 // login
+router.post("/login",passport.authenticate('local',{ failureRedirect: '/login' }),loginController.login)
 
-router.post("/login",passport.authenticate('local', { failureRedirect: '/login' }), loginController.login)
+// auth by local stratergy
+router.get("/profile/by/local-stratergy",connectEnsureLogin.ensureLoggedIn(), async(req,res) => {
+    if(req.isAuthenticated()){
+        return res.send("User authenticated")
+    }
+    else {
+        return res.send("User not athunticated")
+    }
+})
+router.post("/auth",loginController.loginWithJWT)
+
+
+//secure route
+router.get("/profile",passport.authenticate('jwt'),userController.profile)
 module.exports = router

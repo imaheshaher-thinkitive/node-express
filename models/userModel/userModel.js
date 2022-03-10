@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-
+const bcrypt = require("bcrypt")
 const userSchema = new mongoose.Schema({
     email:{
         type:String,
@@ -40,6 +40,14 @@ const userSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
+
+userSchema.methods.isValidPassword = async function(password) {
+    const user = this;
+    const compare = await bcrypt.compare(password, user.password);
+  
+    return compare;
+  }
+  
 const userModel = mongoose.model("user",userSchema)
 
 module.exports = userModel

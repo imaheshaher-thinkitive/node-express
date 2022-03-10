@@ -41,10 +41,25 @@
 # }
 
 
-# POST http://localhost:8000/user/login
+POST http://localhost:8000/user/auth
+Content-Type: application/json
+
+{
+    "email":"mahesh@g.com",
+    "password":"123456"
+ }
+
+# GET http://localhost:8000/user/profile
+# Content-Type: application/json
+# Authorization: Bearer 
+
+# {
+
+# }
+
+# GET http://localhost:8000/user/profile/by/local-stratergy
 # Content-Type: application/json
 
 # {
-#     "username":"mahesh",
-#     "password":"123456"
+
 # }

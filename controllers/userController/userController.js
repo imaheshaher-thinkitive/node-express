@@ -119,3 +119,10 @@ module.exports.delete = async(req,res) => {
         })
     }
 }
+
+module.exports.profile = async(req,res) => {
+    
+    return res.json({
+        user:req.user
+    })
+}
