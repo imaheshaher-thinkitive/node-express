@@ -1,4 +1,4 @@
-# POST http://localhost:8000/user/create
+# POST http://localhost:8000/signup
 # Content-Type: application/json
 
 # {
@@ -10,7 +10,7 @@
 #     "phone":"1234567890"
 # }
 
-# get http://localhost:8000/user/all 
+# get http://localhost:8000/user/alsl
 # Content-Type: application/json
 
 # {
@@ -65,9 +65,10 @@
 # }
 
 
-POST http://localhost:8000/profile/create
-Content-Type: application/json
+# POST http://localhost:8000/profile/cresate
+# Content-Type: application/json
+# Authorization: Bearer 
 
-{
-    
-}
+# {
+
+# }

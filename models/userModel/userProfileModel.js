@@ -5,7 +5,8 @@ const userProfileSchema = new mongoose.Schema({
         type:mongoose.Types.ObjectId,
         ref:'user'
     },
-    address:{
+    avatar:[],
+    address:[{
         street:{
             type:String
         },
@@ -13,7 +14,7 @@ const userProfileSchema = new mongoose.Schema({
             type:String
         },
         pincode:String
-    }
+    }]
 },{timestamps:true})
 
 

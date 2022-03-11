@@ -17,7 +17,7 @@ router.get("/all",userController.getAll)
 router.get("/get/:id",userController.getUserById)
 
 //create user
-router.post("/create",[    
+router.post("/signup",[    
     validateUser.validateEmail,
     validateUser.validatePassword,
     validateUser.validateUsername,

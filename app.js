@@ -18,11 +18,11 @@ dbConnect()
 app.use(express.json())
 
 // routing
-app.use("/user",useRoute)
-app.use("/profile",passport.authenticate("jwt"), profileRoute)
+app.use("/api",useRoute)
+app.use("/api/profile",passport.authenticate("jwt"), profileRoute)
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use(session({
     //secret: process.env.SECRET,

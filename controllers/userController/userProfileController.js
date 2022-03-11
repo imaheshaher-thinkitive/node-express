@@ -1,18 +1,21 @@
-const { inserData, getAllData } = require("../../lib/queryHelper")
+const { inserData, getAllData, insertOrUpdate } = require("../../lib/queryHelper")
 const userProfileModel = require("../../models/userModel/userProfileModel")
 
 module.exports.create = async(req,res) => {
     let data = req.body
-    data.user = req.user._id
-    console.log(req.user)
-    console.log(data)
-    let userData = await inserData(userProfileModel,data)
-    if(userData.status){
+    let query={
+        user:req.user._id
+    }
+    let toUpdate = {
+        $push:{address:data.address} 
+    }
+    let userData = await insertOrUpdate(userProfileModel,query,toUpdate)
+    if(userData){
         res.status(201)
         return res.json({
             "status":true,
             "message":"User address added successfullly",
-            "data":userData.data
+            "data":userData
         })
     }
     else {
@@ -25,9 +28,13 @@ module.exports.create = async(req,res) => {
 }
 
 module.exports.deleteAddress = async(req,res) => {
-    let id = req.user._id
-    console.log(id)
-    userProfileModel.deleteMany({user:id},(err,result)=>{
+    let query = {
+        user:req.user._id
+    }
+    let toUpdateData = {
+        $pull: { address: { _id: req.body.addressId} }
+    }
+    userProfileModel.updateOne(query,toUpdateData,(err,result)=>{
         if(!err){
             return res.send(result)
         }
