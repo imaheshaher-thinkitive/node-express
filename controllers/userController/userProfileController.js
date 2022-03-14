@@ -1,4 +1,4 @@
-const { inserData, getAllData, insertOrUpdate } = require("../../lib/queryHelper")
+const { inserData, getAllData, insertOrUpdate, getData } = require("../../lib/queryHelper")
 const userProfileModel = require("../../models/userModel/userProfileModel")
 
 module.exports.create = async(req,res) => {
@@ -48,7 +48,8 @@ module.exports.getAll = async(req,res) => {
     let query = {
         user : req.user._id
     }
-    let userAddress  = await getAllData(userProfileModel,query)
+    console.log(query)
+    let userAddress  = await getData(userProfileModel,query,{},populate="user")
     return res.json({
         "data":userAddress
     })

@@ -28,7 +28,7 @@ module.exports.create = async(req,res) => {
         else {
             return res.json({
                 "status":false,
-                "messgae":err.message,
+                "message":err.message,
                 "data":{}
             })
         }
@@ -121,8 +121,13 @@ module.exports.delete = async(req,res) => {
 }
 
 module.exports.profile = async(req,res) => {
+    let query = {
+        _id:req.user._id
+    }
     
+    let data = await getData(userModel,query)
+
     return res.json({
-        user:req.user
+        "data":data
     })
-}
+}   

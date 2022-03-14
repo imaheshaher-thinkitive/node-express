@@ -23,10 +23,13 @@ module.exports.loginWithJWT =  async (req, res, next) => {
       'login',{session:false},
       async (err, user, info) => {
         try {
-          if (err || !user) {
+          if (err) {
             const error = new Error('An error occurred.');
 
             return next(error);
+          }
+          if(!user){
+            return res.json({"status":false,"message":"Username or Password are incorrect","data":{}})
           }
 
           req.login(
@@ -38,7 +41,7 @@ module.exports.loginWithJWT =  async (req, res, next) => {
               const body = { _id: user._id, email: user.email };
               const token = jwt.sign({ user: body }, env.JWT_SECRETE);
 
-              return res.json({ token:token});
+              return res.json({"status":true,"message":"User is Logged in Successfull","token":token});
             }
           );
         } catch (error) {

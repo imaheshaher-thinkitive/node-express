@@ -7,7 +7,9 @@ const profileRoute = require("./routes/userRoute/profileRoute")
 
 const passport = require("passport");
 const session = require('express-session');
+const cors = require("cors")
 app.use(express.urlencoded({extended: false}))
+app.use(cors())
 require("./lib/passport-jwt")
 
 

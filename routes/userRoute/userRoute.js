@@ -36,7 +36,7 @@ router.delete("/delete",userController.delete)
 
 
 // login
-router.post("/login",passport.authenticate('local',{ failureRedirect: '/login' }),loginController.login)
+router.post("/auth",passport.authenticate('local',{ failureRedirect: '/login' }),loginController.login)
 
 // auth by local stratergy
 router.get("/profile/by/local-stratergy",connectEnsureLogin.ensureLoggedIn(), async(req,res) => {
@@ -47,7 +47,8 @@ router.get("/profile/by/local-stratergy",connectEnsureLogin.ensureLoggedIn(), as
         return res.send("User not athunticated")
     }
 })
-router.post("/auth",loginController.loginWithJWT)
+router.post("/login",[  validateUser.validateEmail,
+    validateUser.validatePassword,validateData],loginController.loginWithJWT)
 
 
 //secure route
