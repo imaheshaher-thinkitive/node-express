@@ -2,7 +2,7 @@
 # Content-Type: application/json
 
 # {
-#     "firstName":"Mahesh",
+#     "firstName":"Mahesh", 
 #     "lastName":"Aher",
 #     "email":"mahesh@g.com",
 #     "password":"123456",
@@ -72,3 +72,12 @@
 # {
 
 # }
+
+post http://172.104.130.218:5000/info/contact-us/create
+Content-Type: application/json
+Authorization: "token" 
+
+{
+    "type":"General",
+    "details":"something details"
+}

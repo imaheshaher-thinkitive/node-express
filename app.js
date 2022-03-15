@@ -18,7 +18,7 @@ dbConnect()
 
 //json
 app.use(express.json())
-
+app.use("/media",express.static("./media"))
 // routing
 app.use("/api",useRoute)
 app.use("/api/profile",passport.authenticate("jwt"), profileRoute)

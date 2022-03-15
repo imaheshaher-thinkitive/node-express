@@ -5,7 +5,7 @@ const userProfileSchema = new mongoose.Schema({
         type:mongoose.Types.ObjectId,
         ref:'user'
     },
-    avatar:[],
+    avatar:String,
     address:[{
         street:{
             type:String
